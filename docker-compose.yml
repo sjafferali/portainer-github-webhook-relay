@@ -1,0 +1,23 @@
+version: "3.4"
+services:
+  webhookrelay:
+    container_name: webhookrelay
+    restart: unless-stopped
+    image: sjafferali/portainer-github-webhook-relay:latest
+    networks:
+      services:
+        ipv4_address: ${IP_ADDR}
+      z_internal:
+    environment:
+      - PORTAINER_ENDPOINT=${PORTAINER_ENDPOINT}
+      - PORTAINER_USERNAME=${PORTAINER_USERNAME}
+      - PORTAINER_PASSWORD=${PORTAINER_PASSWORD}
+      - PORTAINER_TOKEN_EXPIRATION=${PORTAINER_TOKEN_EXPIRATION}
+      - STACK_CACHE_EXPIRATION=${STACK_CACHE_EXPIRATION}
+networks:
+  services:
+    name: services
+    external: true
+  z_internal:
+    name: z_internal
+    external: true

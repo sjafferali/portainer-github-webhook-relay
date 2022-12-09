@@ -17,8 +17,8 @@ def on_push(data):
 
 
 @webhook.hook()
-def on_ping(data):
-    print(f"received ping: {data}")
+def on_ping():
+    return "Received Ping"
 
 
 if __name__ == "__main__":

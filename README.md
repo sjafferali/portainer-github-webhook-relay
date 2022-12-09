@@ -1,3 +1,6 @@
+[![Docker Hub badge](https://img.shields.io/docker/pulls/sjafferali/portainer-github-webhook-relay)](https://hub.docker.com/repository/docker/sjafferali/portainer-github-webhook-relay)
+
+
 # portainer-github-webhook-relay
 A simple webhook that relays github webhooks to portainer to avoid dealing with portainer webhook URLs.
 
@@ -26,6 +29,19 @@ services:
     restart: unless-stopped
 ```
 
+### docker cli ([click here for more info](https://docs.docker.com/engine/reference/commandline/cli/))
+
+```bash
+docker run -d \
+  --name=webhookrelay \
+  -e =Europe/London \
+  -e PORTAINER_ENDPOINT=https://myportainerendpoint.com \
+  -e PORTAINER_USERNAME=username \
+  -e PORTAINER_PASSWORD=password \
+  -p 80:80 `#optional` \
+  --restart unless-stopped \
+  sjafferali/portainer-github-webhook-relay:latest
+```
 
 ## Environment Variables
 

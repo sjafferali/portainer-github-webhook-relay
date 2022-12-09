@@ -50,5 +50,5 @@ docker run -d \
 | PORTAINER_ENDPOINT | Endpoint of portainer instance to query for webhooks and send webhooks to. | False |
 | PORTAINER_USERNAME | Username to authenticate with. | False |
 | PORTAINER_PASSWORD | Password to authenticate with. | False |
-| TOKEN_EXPIRATION | How long to cache the authentication token. Defaults to 7 hours. | True |
+| PORTAINER_TOKEN_EXPIRATION | How long to cache the authentication token. Defaults to 7 hours. | True |
 | STACK_CACHE_EXPIRATION | How long to cache the portainer stack details. Defaults to 0 which means it will query portainer for the list of stacks on every webhook that is received. | True |

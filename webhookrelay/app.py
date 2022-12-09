@@ -6,9 +6,19 @@ app = Flask(__name__)
 webhook = Webhook(app)
 
 
+@app.route("/")
+def default():
+    return "Send github webhooks here"
+
+
 @webhook.hook()
 def on_push(data):
     process_webhook(data)
+
+
+@webhook.hook()
+def on_ping(data):
+    print(f"received ping: {data}")
 
 
 if __name__ == "__main__":

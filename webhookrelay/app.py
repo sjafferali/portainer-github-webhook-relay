@@ -17,7 +17,7 @@ def on_push(data):
 
 
 @webhook.hook()
-def on_ping():
+def on_ping(data):
     return "Received Ping"
 
 

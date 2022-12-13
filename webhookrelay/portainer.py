@@ -87,7 +87,7 @@ class Portainer:
     def stack_webhook(self, webhook):
         # https: // portainer.home.samir.network/api/stacks/webhooks/f67b9bf3-e03a-49f4-a2b2-9cae81f39039
         url = f"{self.portainer_endpoint}/stacks/webhooks/{webhook}"
-        self.make_request(url=url, method="POST", auth_header=False, body={})
+        return self.make_request(url=url, method="POST", auth_header=False, body={})
 
 
 class Stack:

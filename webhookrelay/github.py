@@ -64,3 +64,4 @@ def process_webhook(data):
 
         commit = data["head_commit"]["id"]
         print(f"commit {commit} triggered webhook for {i.name} {i.webhook}")
+        print(i.webhook(i.webhook))

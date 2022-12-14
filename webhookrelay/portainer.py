@@ -4,6 +4,8 @@ import json
 import traceback
 from cfg import TOKEN_EXPIRATION, STACK_CACHE_EXPIRATION
 
+TIMEOUT = 60
+
 
 class Portainer:
     def __init__(self, portainer_endpoint, username, password, verify=True):
@@ -46,7 +48,7 @@ class Portainer:
             headers["Authorization"] = f"Bearer {token}"
 
         try:
-            r = requests.request(method, headers=headers, url=url, data=body, timeout=30, verify=self.verify_ssl)
+            r = requests.request(method, headers=headers, url=url, data=body, timeout=TIMEOUT, verify=self.verify_ssl)
             r.raise_for_status()
         except requests.exceptions.HTTPError as e:
             print("Http Error:", e)

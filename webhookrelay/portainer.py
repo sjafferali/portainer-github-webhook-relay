@@ -67,8 +67,8 @@ class Portainer:
             json_response = r.json()
         except Exception as e:
             print(f"Error occurred converting response to json {e}")
-            traceback.print_exc()
-            return None
+            #traceback.print_exc()
+            return r.text
 
         return json_response
 

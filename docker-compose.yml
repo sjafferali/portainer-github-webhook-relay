@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     image: sjafferali/portainer-github-webhook-relay:latest
     networks:
-      z_internal:
+      proxy:
     environment:
       - PORTAINER_ENDPOINT=${PORTAINER_ENDPOINT}
       - PORTAINER_USERNAME=${PORTAINER_USERNAME}
@@ -13,5 +13,5 @@ services:
       - PORTAINER_TOKEN_EXPIRATION=${PORTAINER_TOKEN_EXPIRATION}
       - STACK_CACHE_EXPIRATION=${STACK_CACHE_EXPIRATION}
 networks:
-  z_internal:
+  proxy:
     external: true

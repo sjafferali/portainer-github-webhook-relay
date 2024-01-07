@@ -4,14 +4,11 @@ services:
     container_name: webhookrelay
     restart: unless-stopped
     image: sjafferali/portainer-github-webhook-relay:latest
-    networks:
-      proxy:
+    ports:
+      - 43979:80
     environment:
       - PORTAINER_ENDPOINT=${PORTAINER_ENDPOINT}
       - PORTAINER_USERNAME=${PORTAINER_USERNAME}
       - PORTAINER_PASSWORD=${PORTAINER_PASSWORD}
       - PORTAINER_TOKEN_EXPIRATION=${PORTAINER_TOKEN_EXPIRATION}
       - STACK_CACHE_EXPIRATION=${STACK_CACHE_EXPIRATION}
-networks:
-  proxy:
-    external: true

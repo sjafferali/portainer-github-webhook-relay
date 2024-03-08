@@ -65,4 +65,4 @@ def process_webhook(data):
 
         commit = data["head_commit"]["id"]
         logging.info(f"commit {commit} triggered webhook for {i.name} {i.webhook}")
-        logging.info(client.stack_webhook(i.webhook))
+        client.stack_webhook(i.webhook)

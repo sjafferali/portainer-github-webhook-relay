@@ -3,6 +3,7 @@ import datetime
 import json
 import traceback
 from cfg import TOKEN_EXPIRATION, STACK_CACHE_EXPIRATION
+import logging
 
 TIMEOUT = 60
 
@@ -20,10 +21,10 @@ class Portainer:
 
     def get_token(self):
         if self.token and datetime.datetime.now() < self.token_expiration:
-            print("got token from cache")
+            logging.info("got token from cache")
             return self.token
 
-        print("authenticating")
+        logging.info("authenticating")
         response = self.make_request(
             self.portainer_endpoint+"/auth",
             "POST",
@@ -47,37 +48,39 @@ class Portainer:
                 return None
             headers["Authorization"] = f"Bearer {token}"
 
+        logging.info(f"making request {method} {url}")
         try:
             r = requests.request(method, headers=headers, url=url, data=body, timeout=TIMEOUT, verify=self.verify_ssl)
             r.raise_for_status()
         except requests.exceptions.HTTPError as e:
-            print("Http Error:", e)
+            logging.error(f"Http Error: {e}")
             return None
         except requests.exceptions.ConnectionError as e:
-            print("Error Connecting:", e)
+            logging.error(f"Error Connecting: {e}")
             return None
         except requests.exceptions.Timeout as e:
-            print("Timeout Error:", e)
+            logging.error(f"Timeout Error: {e}")
             return None
         except requests.exceptions.RequestException as e:
-            print("OOps: Something Else", e)
+            print(f"OOps: Something Else: {e}")
             return None
 
         try:
             json_response = r.json()
         except Exception as e:
-            print(f"Error occurred converting response to json {e}")
+            logging.error(f"Error occurred converting response to json {e}")
             #traceback.print_exc()
+            logging.error(r.text)
             return r.text
 
         return json_response
 
     def get_stacks(self):
         if self.stack_cache and datetime.datetime.now() < self.stack_cache_expiration:
-            print("got stack list from cache")
+            logging.info("got stack list from cache")
             return self.stack_cache
 
-        print("getting stack list")
+        logging.info("getting stack list")
         url = self.portainer_endpoint + "/stacks"
         response = self.make_request(url=url, method="GET", auth_header=True)
         if response:

@@ -1,5 +1,6 @@
 from cfg import USERNAME, PASSWORD, ENDPOINT
 from portainer import Portainer, Stack
+import logging
 
 client = Portainer(ENDPOINT, USERNAME, PASSWORD)
 
@@ -63,5 +64,5 @@ def process_webhook(data):
             continue
 
         commit = data["head_commit"]["id"]
-        print(f"commit {commit} triggered webhook for {i.name} {i.webhook}")
-        print(client.stack_webhook(i.webhook))
+        logging.info(f"commit {commit} triggered webhook for {i.name} {i.webhook}")
+        logging.info(client.stack_webhook(i.webhook))

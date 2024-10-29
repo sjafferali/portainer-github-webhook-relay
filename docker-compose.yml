@@ -1,4 +1,3 @@
-version: "3.4"
 services:
   webhookrelay:
     container_name: webhookrelay
